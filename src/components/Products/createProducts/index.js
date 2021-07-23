@@ -155,7 +155,6 @@ onChange={formik.handleChange}
 </div>
     </div>
 
-
 <div className="partTwo--info">
 <div className="info--visualizacion">
 <div className="header--infoVisualizacion"><h1>Visualizacion</h1></div>
@@ -188,7 +187,6 @@ name="storageType"
 type="text"
 onChange={formik.handleChange}
 />
-
 
 <h2 className="title--inputs--products">*Embalaje</h2>
 <input 
@@ -246,7 +244,6 @@ type="text"
 onChange={formik.handleChange}
 />
 
-
 <h2 className="title--inputs--products">*Bodega</h2>
 <input 
 className="style--inputs--products"
@@ -262,7 +259,6 @@ name="locationInWinery"
 type="text"
 onChange={formik.handleChange}
 />
-
 
 <h2 className="title--inputs--products">*Rotacion</h2>
 <input 
@@ -281,7 +277,7 @@ onChange={formik.handleChange}
                 </div>
             </div>
         </div>
-    ) 
+    )
 }
 
 export default CreateProducts
