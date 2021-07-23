@@ -1,15 +1,22 @@
-import React from 'react'
+import { React, useState } from 'react'
 import '../createProducts/createProducts.css'
 import {useFormik} from 'formik'
+import { createProductsApi} from '../../../endpoint/products.api'
+import SelectInput from '../../SelectInput'
 
 const CreateProducts = () => {
 
-    const formik =useFormik({
+const onSubmit =async (formData_)  =>{
+await console.log(formData_)
+const result =  createProductsApi(formData_)
+}
+
+    const formik = useFormik({
         initialValues:{
             name:'',
             description:'',
             code:'',
-            barcode:'',
+            barCode:'',
             cost:'',
             netPrice:'',
             marginOfGain:'',
@@ -26,10 +33,11 @@ const CreateProducts = () => {
             high:'',
             width:'',
             locationInWinery:'',
+            status:'',
+            line:'',
+            rotation:''
         },
-        onsubmit:(values) =>{
-            console.log(values)
-        }
+        onSubmit,
     })
 
     return (
@@ -44,6 +52,7 @@ const CreateProducts = () => {
        
 <div className="infoGeneral--products">
      <div className="header--infoGeneral"><h1>Informacion general</h1></div>   
+
 <h2 className="title--inputs--products">*Nombre</h2>
 <input 
 className="style--inputs--products"
@@ -68,25 +77,24 @@ onChange={formik.handleChange}
 <h2 className="title--inputs--products">*Codigo de barras</h2>
 <input 
 className="style--inputs--products"
-name="barcode"
+name="barCode"
 type="text"
 onChange={formik.handleChange}
 />
-
 
 <h2 className="title--inputs--products">*Estado</h2>
-<input 
-className="style--inputs--products"
-name="barcode"
-type="text"
-onChange={formik.handleChange}
-/>
 
+<SelectInput 
+fieldName = 'status'
+formHook =  {formik}
+labelKey = 'Estado'
+optionVals = {[ 'Activo' , 'Inactivo']}
+/>
 
 <h2 className="title--inputs--products">*Categoria</h2>
 <input 
 className="style--inputs--products"
-name="barcode"
+name="category"
 type="text"
 onChange={formik.handleChange}
 />
@@ -94,7 +102,7 @@ onChange={formik.handleChange}
 <h2 className="title--inputs--products">*Linea</h2>
 <input 
 className="style--inputs--products"
-name="barcode"
+name="line"
 type="text"
 onChange={formik.handleChange}
 />
@@ -259,7 +267,7 @@ onChange={formik.handleChange}
 <h2 className="title--inputs--products">*Rotacion</h2>
 <input 
 className="style--inputs--products"
-name="barcode"
+name="rotation"
 type="text"
 onChange={formik.handleChange}
 />
@@ -268,7 +276,6 @@ onChange={formik.handleChange}
 </div>
 
 <button className="buttons--products--create" type="submit">CREAR PRODUCTO</button>
-
 
 </form>
                 </div>
