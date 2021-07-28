@@ -20,6 +20,10 @@
   height: 5.5ch;
 }
 
+.file-icon:hover {
+  cursor: pointer;
+}
+
 .wrapper {
   max-width: 95%;
   text-align: center;
