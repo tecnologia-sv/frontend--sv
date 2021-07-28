@@ -2,8 +2,9 @@
 
 .file {
   position: absolute;
-  bottom: 0;
-  right: 0;
+
+  bottom: 50%;
+  left: 10%;
   filter: alpha(opacity=0);
   opacity: 0;
 }
@@ -50,6 +51,7 @@
 }
 
 .info-container {
+  position: relative;
   text-align: center;
   padding-left: 0;
   flex: 30%;

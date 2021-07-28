@@ -109,11 +109,10 @@ const postSeller = async (sellerData) => {
   }
 };
 
-const putSeller = async (sellerData) => {
+const putSeller = async ({ sellerData, id }) => {
   try {
-    for (const data in sellerData.values()) {
-      console.log(data);
-    }
+    const putURL = `${process.env.REACT_APP_SERVER_HOST}/sellers/${id}`;
+    await axios.put(putURL, sellerData);
     return { message: "Asesor actualizado correctamente", correct: true };
   } catch (error) {
     return {

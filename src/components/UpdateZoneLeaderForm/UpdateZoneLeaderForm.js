@@ -30,7 +30,8 @@ const libraries = ["places"];
 const MAX_SIZE = 7 * 1024 * 1024;
 
 const UpdateZoneLeaderForm = (props) => {
-  const { labelKeys, typeKeys, selectValues, zoneKeys, leadersKeys } = props;
+  const { labelKeys, typeKeys, selectValues, zoneKeys, leadersKeys, leaderId } =
+    props;
   let { defaultInitialValues } = props;
   const valueKeys = Object.keys(typeKeys);
 
@@ -254,7 +255,11 @@ const UpdateZoneLeaderForm = (props) => {
       bankData: "bankCertification",
     };
     for (const key in formik.touched) {
-      if (formik.initialValues[key] !== formik.values[key]) {
+      if (
+        formik.initialValues[key] !== formik.values[key] &&
+        key !== "zone" &&
+        key !== "superCode"
+      ) {
         console.log(redundancyMap[key]);
         data.append(redundancyMap[key], formik.values[key]);
       }
@@ -275,8 +280,6 @@ const UpdateZoneLeaderForm = (props) => {
         }
       }
     }
-    data.append("email", formik.values["email"]);
-    data.append("cellphone", formik.values["cellphone"]);
     for (const key in zoneKeys) {
       if (zoneKeys[key] === formik.values["zone"]) {
         data.append("zoneId", key);
@@ -298,12 +301,12 @@ const UpdateZoneLeaderForm = (props) => {
       let correct = false;
 
       if (formik.values["isLeader"]) {
-        const res = await putLeader(data);
+        const res = await putLeader({ sellerData: data, id: leaderId });
         message = res.message;
         correct = res.correct;
       }
       if (!formik.values["isLeader"]) {
-        const res = await putSeller(data);
+        const res = await putSeller({ sellerData: data, id: leaderId });
         message = res.message;
         correct = res.correct;
       }
@@ -518,7 +521,7 @@ const UpdateZoneLeaderForm = (props) => {
           onClick={handleErrorClick}
           className={zoneLeaderStyles["submit-button"]}
         >
-          CREAR ASESOR
+          GUARDAR
         </button>
       </div>
 
@@ -530,7 +533,7 @@ const UpdateZoneLeaderForm = (props) => {
         className={zoneLeaderStyles["Modal"]}
         overlayClassName={zoneLeaderStyles["Overlay"]}
       >
-        <p align="center">Confirme creación de asesor</p>
+        <p align="center">Confirme actualización de asesor</p>
         <div style={{ textAlign: "center" }}>
           <button
             onClick={handleSubmitDataFromModal}
